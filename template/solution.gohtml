@@ -1,7 +1,8 @@
 
-用户ID:{{.UserId}}
-用户操作:{{.Action}}
-商城名称:{{.SolutionName}}
-商城模版ID:{{.TemplateId}}
-语言:{{.Language}}
-货币:{{.Currency}}
+
+{{template "user.gohtml" .}}
+用户操作:{{.solution.Action}}
+商城名称:{{.solution.SolutionName}}
+商城模版ID:{{.solution.TemplateId}}
+语言:{{.solution.Language}}
+货币:{{.solution.Currency}}

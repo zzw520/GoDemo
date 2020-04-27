@@ -1,44 +1,43 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"log"
-	"os"
-	"path/filepath"
 	"text/template"
 )
 
 type ecSolution struct{
-	UserId string
 	Action string
 	SolutionName string
 	TemplateId string
 	Language string
-	currency string
+	Currency string
 }
 
 func main()  {
 	solution:=ecSolution{
-		UserId:       "1",
 		Action:       "2",
 		SolutionName: "3",
 		TemplateId:   "4",
 		Language:     "5",
-		currency:     "6",
+		Currency:     "6",
 	}
-	fmt.Printf("aaa:%s",filepath.Base("./"))
-	s, _ := filepath.Abs("./")
-	fmt.Printf("bbb:%s", s)
-	file, err := filepath.Abs("./test.gohtml")
-	if err!=nil {
-		log.Fatal(err)
-		return
-	}
-	files, err := template.ParseFiles(file)
+	data := make(map[string]interface{})
+	data["solution"]=solution
+	data["UserId"]="1000"
+	data["UserName"]="bob"
+	files, err := template.ParseFiles("template/solution.gohtml","template/user.gohtml")
 	if err != nil {
 		log.Fatal(err)
 		return
 	}
-	files.Execute(os.Stdout,solution)
+	buf := new(bytes.Buffer)
+	err = files.Execute(buf, data)
+	if err != nil {
+		log.Fatal(err)
+		return
+	}
+	fmt.Print(buf.String())
 
 }

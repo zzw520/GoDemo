@@ -39,7 +39,7 @@ func main() {
 
 func unmarshal(in []byte, out interface{}, isStrict bool) (err error) {
 	if in == nil {
-		err = error(errors.New("can't unmarshal empty byte"))
+		err = errors.New("can't unmarshal empty byte")
 		return err
 	}
 	if isStrict == true {
