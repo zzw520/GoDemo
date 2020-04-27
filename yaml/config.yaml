@@ -1,0 +1,13 @@
+sms:
+  smsTopics: {
+    "ec":{
+      "provider": huawei,
+      "endpoint": https://rtcsms.ap-southeast-1.myhuaweicloud.com:443,
+      "to":[aa,bb,cc]
+    },
+    "dev":{
+      "provider": chuanglan,
+      "endpoint": http://smssh1.253.com/msg/send/json,
+      "to":[aa,bb,cc]
+    }
+  }
