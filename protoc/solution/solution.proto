@@ -1,0 +1,258 @@
+syntax = "proto3";
+
+package solution;
+option go_package = "app/protoc/protocol/solution";
+
+service SolutionService {
+    rpc QueryList (SolutionListRequest) returns (SolutionListResponse);
+    rpc QueryDetail (SolutionDetailRequest) returns (SolutionDetailResponse);
+    rpc SaveOrUpdate (SolutionSaveOrUpdateRequest) returns (SimpleResponse);
+    rpc QueryTemplateList (SolutionTemplateListRequest) returns (SolutionTemplateListResponse);
+    rpc QueryTemplateDetail (SolutionTemplateDetailRequest) returns (SolutionTemplateDetailResponse);
+}
+
+// request & response
+message SimpleResponse {
+    int32 code = 1;
+    string msg = 2;
+}
+
+message SolutionListRequest {
+    string source = 1;
+    string companyId = 2;
+    string accountId = 3;
+    SolutionListRequestData data = 4;
+}
+
+message SolutionListResponse {
+    int32 code = 1;
+    string msg = 2;
+    SolutionListResponseData data = 3;
+}
+
+message SolutionDetailRequest {
+    string source = 1;
+    string companyId = 2;
+    string accountId = 3;
+    SolutionDetailRequestData data = 4;
+}
+
+message SolutionDetailResponse {
+    int32 code = 1;
+    string msg = 2;
+    Solution data = 3;
+}
+
+message SolutionSaveOrUpdateRequest {
+    string source = 1;
+    string companyId = 2;
+    string accountId = 3;
+    Solution data = 4;
+}
+
+message SolutionTemplateListRequest {
+    string source = 1;
+    string companyId = 2;
+    string accountId = 3;
+    SolutionTemplateListRequestData data = 4;
+}
+
+message SolutionTemplateListResponse {
+    int32 code = 1;
+    string msg = 2;
+    SolutionTemplateListResponseData data = 3;
+}
+
+message SolutionTemplateDetailRequest {
+    string source = 1;
+    string companyId = 2;
+    string accountId = 3;
+    SolutionTemplateDetailRequestData data = 4;
+}
+
+message SolutionTemplateDetailResponse {
+    int32 code = 1;
+    string msg = 2;
+    Template data = 3;
+}
+
+message SolutionListRequestData {
+    repeated string solutionIds = 1;
+}
+
+message SolutionDetailRequestData {
+    string id = 1;
+}
+
+message SolutionTemplateListRequestData {
+    string type = 1;
+}
+
+message SolutionListResponseData {
+    repeated Solution items = 1;
+}
+
+message SolutionTemplateListResponseData {
+    repeated Template items = 1;
+}
+
+message SolutionTemplateDetailRequestData {
+    string id = 1;
+}
+
+message Solution {
+    string id = 1;
+    string no = 2;
+    // @inject_tag: bson:"companyId"
+    string companyId = 3;
+    string name = 4;
+    // @inject_tag: bson:"innerName"
+    string innerName = 5;
+    string type = 6;
+    repeated Domain domains = 7;
+    // @inject_tag: bson:"viewId"
+    string viewId = 8;
+    // @inject_tag: bson:"mobilePreviewImage"
+    string mobilePreviewImage = 9;
+    // @inject_tag: bson:"pcPreviewImage"
+    string pcPreviewImage = 10;
+    string thumbnail = 11;
+    // @inject_tag: bson:"templateId"
+    string templateId = 12;
+    // @inject_tag: bson:"paymentTypes"
+    repeated string paymentTypes = 13;
+    // @inject_tag: bson:"domainCertificate"
+    string domainCertificate = 14;
+    // @inject_tag: bson:"isSSL"
+    bool isSSL = 15;
+    string logo = 16;
+    string status = 17;
+    string language = 18;
+    // @inject_tag: bson:"currencyCode"
+    string currencyCode = 19;
+    // @inject_tag: bson:"currencySymbol"
+    string currencySymbol = 20;
+    // @inject_tag: bson:"createTime"
+    string createTime = 21;
+    // @inject_tag: bson:"updateTime"
+    string updateTime = 22;
+    // @inject_tag: bson:"platformSolutionToken"
+    string platformSolutionToken = 23;
+    // @inject_tag: bson:"platformSolutionId"
+    string platformSolutionId = 24;
+    // @inject_tag: bson:"platformSolutionName"
+    string platformSolutionName = 25;
+    // @inject_tag: bson:"platformName"
+    string platformName = 26;
+    // @inject_tag: bson:"singlePageConfig"
+    SinglePageConfig singlePageConfig = 27;
+}
+
+message Domain {
+    string domain = 1;
+    string status = 2;
+}
+
+message SinglePageConfig {
+    string productId = 1;
+    // @inject_tag: bson:"customFunctions"
+    repeated string customFunctions = 2;
+    // @inject_tag: bson:"markingConfig"
+    MarkingConfig markingConfig = 3;
+}
+
+message MarkingConfig {
+    // @inject_tag: bson:"timeCount"
+    TimeCount timeCount = 1;
+    // @inject_tag: bson:"groupPurchase"
+    GroupPurchase groupPurchase = 2;
+    // @inject_tag: bson:"fullReduction"
+    FullReduction fullReduction = 3;
+    string judgement = 4;
+}
+
+message TimeCount {
+    // @inject_tag: bson:"durationSecond"
+    int64 durationSecond = 1;
+    // @inject_tag: bson:"productTotal"
+    int64 productTotal = 2;
+    // @inject_tag: bson:"productSold"
+    int64 productSold = 3;
+    // @inject_tag: bson:"hoursToAddSold"
+    int64 hoursToAddSold = 4;
+    // @inject_tag: bson:"productToAddSold"
+    int64 productToAddSold = 5;
+    // @inject_tag: bson:"hoursToRecover"
+    int64 hoursToRecover = 6;
+}
+
+message GroupPurchase {
+    int64 members = 1;
+    int64 reduction = 2;
+}
+
+message FullReduction {
+    // @inject_tag: bson:"amountToReduction"
+    int64 amountToReduction = 1;
+    int64 reduction = 2;
+}
+
+message Template {
+    string id = 1;
+    string name = 2;
+    string desc = 3;
+    string type = 4;
+    // @inject_tag: bson:"pcPreviewImage"
+    string pcPreviewImage = 5;
+    // @inject_tag: bson:"mobilePreviewImage"
+    string mobilePreviewImage = 6;
+    string thumbnail = 7;
+    // @inject_tag: bson:"listImage"
+    string listImage = 8;
+    repeated string languages = 9;
+    // @inject_tag: bson:"isFree"
+    bool isFree = 10;
+    TemplateConfig config = 11;
+}
+
+message TemplateConfig {
+    // @inject_tag: bson:"hasLogo"
+    bool hasLogo = 1;
+    // @inject_tag: bson:"hasDomain"
+    bool hasDomain = 2;
+    // @inject_tag: bson:"hasPaymentType"
+    bool hasPaymentType = 3;
+    // @inject_tag: bson:"hasCountry"
+    bool hasCountry = 4;
+    // @inject_tag: bson:"hasBrandSiteModules"
+    bool hasBrandSiteModules = 5;
+    // @inject_tag: bson:"hasDemand"
+    bool hasDemand = 6;
+    // @inject_tag: bson:"hasContact"
+    bool hasContact = 7;
+    // @inject_tag: bson:"hasSinglePageCustomFunctions"
+    bool hasSinglePageCustomFunctions = 8;
+    // @inject_tag: bson:"hasBrandSiteCustomFunctions"
+    bool hasBrandSiteCustomFunctions = 9;
+    // @inject_tag: bson:"hasMallCustomFunctions"
+    bool hasMallCustomFunctions = 10;
+    // @inject_tag: bson:"hasAppCustomFunctions"
+    bool hasAppCustomFunctions = 11;
+    // @inject_tag: bson:"hasSinglePageProduct"
+    bool hasSinglePageProduct = 12;
+    // @inject_tag: bson:"hasSinglePageMarkingTimeCount"
+    bool hasSinglePageMarkingTimeCount = 13;
+    // @inject_tag: bson:"hasSinglePageMarkingGroupPurchase"
+    bool hasSinglePageMarkingGroupPurchase = 14;
+    // @inject_tag: bson:"hasSinglePageMarkingFullReduction"
+    bool hasSinglePageMarkingFullReduction = 15;
+    // @inject_tag: bson:"hasSinglePageMarkingJudgement"
+    bool hasSinglePageMarkingJudgement = 16;
+    // @inject_tag: bson:"hasLanguage"
+    bool hasLanguage = 17;
+    // @inject_tag: bson:"hasCurrency"
+    bool hasCurrency = 18;
+    // @inject_tag: bson:"hasDomains"
+    bool hasDomains = 19;
+}
+

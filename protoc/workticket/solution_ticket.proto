@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package workticket;
+option go_package = "app/protoc/protocol/workticket";
+
+import "solution/solution.proto";
+import "workticket/common_ticket.proto";
+
+service Solution {
+    rpc SolutionCreate (solution.SolutionDetailRequest) returns (WorkTicketResp);
+    rpc SolutionUpdate (solution.SolutionDetailRequest) returns (WorkTicketResp);
+}

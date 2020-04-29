@@ -1,4 +1,4 @@
-module GoDemo
+module app
 
 go 1.12
 

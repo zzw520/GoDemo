@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package workticket;
+option go_package = "app/protoc/protocol/workticket";
+
+message WorkTicketResp {
+    int32 code = 1;
+    string msg = 2;
+}
