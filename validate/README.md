@@ -18,3 +18,6 @@
 - Tel
 - Phone
 - ZipCode
+
+# 原文地址
+https://github.com/astaxie/beego/tree/develop/validation
