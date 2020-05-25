@@ -13,6 +13,8 @@ type user struct {
 	Id   int
 	Name string `valid:"Required;Match(/^(test)?\\w*@;com$/)"`
 	Age  int    `valid:"Required;Range(1, 140)"`
+	Address []string `valid:"Required"`
+	Money float64 `valid:"Match(/^[+]{0,1}(\\d+)$|^[+]{0,1}(\\d+\\.\\d+)$/)"`
 }
 
 func main() {
@@ -20,7 +22,7 @@ func main() {
 	// ignore empty field valid
 	// see CanSkipFuncs
 	// valid := validation.Validation{RequiredFirst:true}
-	u := user{Name: "", Age: 0}
+	u := user{Name: "", Age: 0,Address:[]string{""},Money:0}
 	b, err := valid.Valid(u)
 	if err != nil {
 		// handle error
